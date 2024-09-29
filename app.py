@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 current_dir = os.path.abspath(os.path.dirname(__file__))
-
+#hello
 app = Flask(__name__)
 #esp
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.join(current_dir, "user.sqlite3")
