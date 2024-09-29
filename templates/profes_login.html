@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Professional Signup</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Service Professional Signup</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <!-- Full Name -->
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" class="form-control" id="fullName" name="full_name" placeholder="Enter your full name" required>
+        </div>
+    
+        <!-- Email ID -->
+        <div class="form-group">
+            <label for="email">Email ID</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+    
+        <!-- Password -->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+    
+        <!-- Service Name -->
+        <div class="form-group">
+            <label for="serviceName">Service Name</label>
+            <select class="form-control" id="serviceName" name="service_name" required>
+                <option value="">Select a service</option>
+                <option value="plumbing">Plumbing</option>
+                <option value="electrician">Electrician</option>
+                <option value="cleaning">Cleaning</option>
+                <option value="carpentry">Carpentry</option>
+                <option value="painting">Painting</option>
+            </select>
+        </div>
+    
+        <!-- Experience (in years) -->
+        <div class="form-group">
+            <label for="experience">Experience (in years)</label>
+            <input type="number" class="form-control" id="experience" name="experience" placeholder="Enter your experience in years" min="0" required>
+        </div>
+    
+        <!-- Attach Document (PDF) -->
+        <div class="form-group">
+            <label for="document">Attach Document (PDF)</label>
+            <input type="file" class="form-control-file" id="document" name="document" accept=".pdf" required>
+        </div>
+    
+        <!-- Address -->
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter your address" required></textarea>
+        </div>
+    
+        <!-- Pin Code -->
+        <div class="form-group">
+            <label for="pinCode">Pin Code</label>
+            <input type="text" class="form-control" id="pinCode" name="pincode" placeholder="Enter your pin code" required>
+        </div>
+    
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+        <a href="{{ url_for('login') }}">login here</a>
+    </form>
+    
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
