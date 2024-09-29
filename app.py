@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 current_dir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
-
+#esp
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.join(current_dir, "user.sqlite3")
 app.config['SECRET_KEY'] = 'xYxx1528'
 
