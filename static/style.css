@@ -1,0 +1,29 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 60vh;
+}
+
+.form-inline {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 15px;
+}
+
+.form-inline label {
+    margin-right: 10px; 
+    min-width: 100px; 
+}
+
+.form-inline .form-control {
+    flex-grow: 1; 
+}
+
+form {
+    max-width: 400px; 
+    width: 100%;
+}
+nav{
+    align-items: right !important;
+}
