@@ -116,21 +116,27 @@ The Household Services Application is a multi-user platform designed to provide 
 
 The application adheres to the following flow:
 - **Home Page**: Role-based login and registration.
-- **Admin Dashboard**: Manage services and users.
-- **Customer Dashboard**: Search for and request services.
-- **Professional Dashboard**: View and manage assigned requests.
+![Screenshot 2024-12-15 203716](https://github.com/user-attachments/assets/1879ba38-70a3-4b51-af84-0874d07802b0)
+![Screenshot 2024-12-15 201907](https://github.com/user-attachments/assets/dba041a1-e40c-4290-a429-329a1e94b9e8)
+![Screenshot 2024-12-15 203738](https://github.com/user-attachments/assets/b9455ae7-81cb-43c1-99fe-39e4255b7665)
 
-## Screenshots
-![Screenshot 2024-12-15 201326](https://github.com/user-attachments/assets/de6fd50c-7f04-4f34-b6ab-fb12a52fe6dd)
-![Screenshot 2024-12-15 201150](https://github.com/user-attachments/assets/463dba2f-15d2-42b9-a590-1fbb944ceabf)
-![Screenshot 2024-12-15 201003](https://github.com/user-attachments/assets/44161c8d-7784-4d42-a136-7d39904ca47e)
-![Screenshot 2024-12-15 201925](https://github.com/user-attachments/assets/05331407-17b4-4f9a-806f-2afbbe83d205)
-![Screenshot 2024-12-15 201907](https://github.com/user-attachments/assets/a5006523-3519-492e-90cb-55b6eea3e364)
-![Screenshot 2024-12-15 201717](https://github.com/user-attachments/assets/4830ba16-92c7-4d95-8b1e-01cb03677228)
-![Screenshot 2024-12-15 201625](https://github.com/user-attachments/assets/b191f600-d916-4221-bef5-74373c180366)
-![Screenshot 2024-12-15 201447](https://github.com/user-attachments/assets/47ab6369-a3c1-4fb5-8a03-7fb2ab1fe10e)
-![Screenshot 2024-12-15 201417](https://github.com/user-attachments/assets/e4ea13fb-d04f-4376-8dfc-38fc2b5ad1c3)
-![Screenshot 2024-12-15 201351](https://github.com/user-attachments/assets/1ced6295-b5bc-47cb-86aa-1b2ccff387fc)
+- **Admin Dashboard**: Manage services and users.
+![Screenshot 2024-12-15 200951](https://github.com/user-attachments/assets/76ff5fa0-49ab-4a44-be6d-e313f87b980f)
+![Screenshot 2024-12-15 201925](https://github.com/user-attachments/assets/7e8aa4d3-6ef3-484d-a803-0851e8bd2120)
+![Screenshot 2024-12-15 201003](https://github.com/user-attachments/assets/59be8868-7e81-409b-a8c4-8ba14e191632)
+
+- **Customer Dashboard**: Search for and request services.
+![Screenshot 2024-12-15 201447](https://github.com/user-attachments/assets/64dcc7a7-9568-4b2c-83f6-a1953fabc435)
+![Screenshot 2024-12-15 201717](https://github.com/user-attachments/assets/fd9b3562-8e83-410e-a78a-35d6bc73b379)
+![Screenshot 2024-12-15 201625](https://github.com/user-attachments/assets/6add70a2-b3dd-40d5-8d1b-844a51f3559f)
+
+- **Professional Dashboard**: View and manage assigned requests.
+![Screenshot 2024-12-15 201351](https://github.com/user-attachments/assets/9ef9d57e-f3e6-4c35-a23f-0da9faf1375e)
+![Screenshot 2024-12-15 201150](https://github.com/user-attachments/assets/baee29cb-38f8-4a94-95b3-82907b791717)
+![Screenshot 2024-12-15 201417](https://github.com/user-attachments/assets/96116d2a-0f22-41fd-a037-c8d5dbd45558)
+
+
+
 
 
 
