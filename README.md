@@ -51,33 +51,51 @@ The Household Services Application is a multi-user platform designed to provide 
 ## Database Models
 ![schemaa](https://github.com/user-attachments/assets/7ec37275-4bd9-4f3a-9c51-c505945776e4)
 
-### Users Table
+### Customer Table
 - `id` (Primary Key)
-- `username`
-- `password`
-- `role` (admin, professional, customer)
-- Other relevant fields...
+- `username` (VARCHAR)
+- `password` (VARCHAR)
+- `fullname` (VARCHAR)
+- `address` (VARCHAR)
+- `pincode` (INTEGER)
+- `phone_no` (VARCHAR)
+- `application_status` (VARCHAR)
+
+### Professionals Table
+- `id` (Primary Key)
+- `username` (VARCHAR)
+- `password` (VARCHAR)
+- `fullname` (VARCHAR)
+- `service_id` (INTEGER, Foreign Key)
+- `experience` (INTEGER)
+- `pdf_doc` (BLOB)
+- `address` (VARCHAR)
+- `pincode` (VARCHAR)
+- `phone_no` (VARCHAR)
+- `rating` (INTEGER)
+- `pricing` (INTEGER)
+- `service_desc` (VARCHAR)
+- `time_req` (VARCHAR)
+- `application_status` (VARCHAR)
 
 ### Services Table
 - `id` (Primary Key)
-- `name`
-- `price`
-- `time_required`
-- `description`
+- `service_name` (VARCHAR)
+- `service_bp` (INTEGER) - Base price
+- `time_req` (VARCHAR)
+- `service_desc` (VARCHAR)
 
 ### Service Requests Table
 - `id` (Primary Key)
-- `service_id` (Foreign Key)
-- `customer_id` (Foreign Key)
-- `professional_id` (Foreign Key)
-- `date_of_request`
-- `date_of_completion`
-- `service_status` (requested/assigned/closed)
-- `remarks`
-
-### Additional Tables
-- **Customer Reviews Table**
-- **Professional Profile Documents Table**
+- `service_id` (INTEGER, Foreign Key - Services Table)
+- `customer_id` (INTEGER, Foreign Key - Customer Table)
+- `professional_id` (INTEGER, Foreign Key - Professionals Table)
+- `date_of_request` (VARCHAR)
+- `date_of_completion` (VARCHAR)
+- `service_status` (VARCHAR) - (requested/assigned/closed)
+- `service_rating` (INTEGER)
+- `customer_remarks` (VARCHAR)
+- `professional_remark` (VARCHAR)
 
 ## Installation
 
