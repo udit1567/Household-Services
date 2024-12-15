@@ -3,43 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inline Form</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/style.css">
+    <title>YourHome Service</title>
+    <style>
+        .screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background-color: #fff6e9;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #ff6913;
+        }
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #fc9153;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #ff8725;
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <nav class="navbar navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand ml-auto" href="{{url_for('signup')}}">Register as professional</a>
-            </div>
-        </nav>
+    <div class="screen">
+        <h1>Welcome to YourHome Service</h1>
+        <a href="/login" class="btn">Click here to continue</a>
     </div>
-
-<div class="form-container">
-    <form method="POST">
-        <div class="form-group form-inline">
-            <label for="exampleInputEmail1">Registered Email id:</label>
-            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        </div>
-
-        <div class="form-group form-inline">
-            <label for="exampleInputPassword1">Password:</label>
-            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        <div>
-            <button type="submit" class="btn btn-primary mt-2 ">login</button>
-            <a href="{{url_for('register')}}">Create an account?</a>
-        </div>
-        
-    </form>
-
-    
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>

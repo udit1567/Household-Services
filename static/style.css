@@ -1,29 +1,128 @@
-.form-container {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    height: 60vh;
-}
-
-.form-inline {
-    display: flex;
-    align-items: center; 
-    margin-bottom: 15px;
-}
-
-.form-inline label {
-    margin-right: 10px; 
-    min-width: 100px; 
-}
-
-.form-inline .form-control {
-    flex-grow: 1; 
-}
-
-form {
-    max-width: 400px; 
+#canvas{
     width: 100%;
+    height: 730px;
+    padding: 6px;
+    background-color: #fff6e9;
 }
-nav{
-    align-items: right !important;
+
+#Admin_canvas{
+    width: 100%;
+    height: 980px;
+    padding: 6px;
+    background-color: #fff6e9;
+}
+
+#form-login{
+    border: 1px solid gray;
+    width: 430px;
+    height: 350px;
+    margin: auto;
+    margin-top: 100px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: rgb(255, 237, 197);
+}
+
+#trans-table{
+    border: 2px solid rgb(255, 203, 114);
+    margin-top: 25px !important;
+    margin: auto;
+    overflow-y: auto;
+    height: 241px;
+    width: 900px;
+    border-radius: 15px;
+    padding: 12px;
+    background-color: rgb(255, 237, 197);
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(255, 237, 197);
+    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+    box-shadow: 0px 4px 10px rgba(231, 114, 114, 0.1);
+}
+
+
+.service-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.service-item {
+    background-color: #ffc164;
+    border-radius: 14px;
+    padding: 15px;
+    width: 170px;
+    text-align: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.service-item:hover {
+    background-color: #f5a022;
+}
+
+#panel{
+    height: 220px;
+    width: 640px;
+    margin-top: 35px !important;
+    margin: auto;
+}
+
+.table thead th {
+    position: sticky;
+    top: 0;
+    background-color: rgb(255, 208, 138); 
+}
+
+.table th, .table td {
+    text-align: center; 
+    vertical-align: middle; 
+}
+
+.modal-content {
+    height: 100%;
+}
+
+#form-professional-register{
+    border: 1px solid rgb(0, 0, 0);
+    width: 540px;
+    height: 620px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 17px;
+    border-radius: 15px;
+    background-color: rgb(255, 237, 197);
+    
+}
+
+#form-customer-register{
+    border: 2px solid gray;
+    width: 413px;
+    height: 589px;
+    margin: auto;
+    margin-top: 18px;
+    padding: 16px;
+    border-radius: 20px;
+    background-color: rgb(255, 237, 197);
+    
+}
+
+.form-inline .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.form-inline .form-group label {
+    margin-right: 10px;
+    width: 120px;
+}
+
+.flashes{
+    
 }

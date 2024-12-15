@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div id="main">
+        <div id="canvas">
+            <div>
+                <nav class="navbar navbar-expand-lg " style="margin-top: -14px;">
+                    <div class="container-fluid justify-content-center" style="background-color: rgb(252, 218, 168);">
+                        <h3 class="page-header">YourHome Service</h3>
+                    </div>
+                </nav>
+            </div>
+            
+            <div id="form-customer-register">
+                <h1 >Customer Signup</h1>
+            <form class="form-body form-inline" method="POST" action="/register_customer">
+                    <div class="form-group">
+                        <label for="full_name">Full Name : </label>
+                        <input type="text" class="form-control" id="full_name" name="fullname" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Username (Email id) : </label>
+                        <input type="email" class="form-control" id="email" name="username" placeholder="Enter your Username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password : </label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Phone no : </label>
+                        <input type="text" class="form-control" id="phone" name="phone_no" placeholder="Enter your Phone no." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address :</label>
+                        <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter your address" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pin Code :</label>
+                        <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Enter your pin code" required>
+                    </div><br>
+                    <button type="submit" class="btn btn-primary btn-block">Signup</button><br>
+                    Already have an account ?  <a href="{{ url_for('login') }}">Login</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

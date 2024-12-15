@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div id="main">
+        <div id="canvas">
+          <nav class="navbar navbar-expand-lg" style="margin-top: -14px;">
+            <div class="container-fluid" style="background-color: rgb(252, 218, 168);">
+              <a class="navbar-brand" href="#">Professional Dashboard</a>
+              <div >
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="display: flex; margin-left: 1000px;>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/professional_dashboard/{{professional.id}}">Home</a>
+                  </li> 
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/professional_search_services/{{professional.id}}">Search</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/profes_summary_dash/{{professional.id}}">Summary</a>
+                  </li> 
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/login">logout</a>
+                  </li>
+
+                </ul>
+                </div>
+              </div>
+            </div>
+          </nav>
+          <div style="display: flex; align-items: center;">
+            <h3>Welcome, {{professional.fullname}}!</h3>
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editUserInfoModal{{professional.id}}" 
+                    style="margin-left: auto; margin-top: 0px;">
+                My Profile
+            </button>
+          </div>
+
+          <div id="editUserInfoModal{{professional.id}}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{professional.fullname}}'s Profile</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/edit_pro_info/{{professional.id}}" method="POST">
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control" id="name" name="fullname" value="{{professional.fullname}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" class="form-control" id="username" name="username" value="{{professional.username}}" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="phone">Phone Number:</label>
+                              <input type="tel" class="form-control" id="phone" name="phone_no" value="{{professional.phone_no}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address:</label>
+                                <input type="text" class="form-control" id="address" name="address" value="{{professional.address}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pincode">Pincode:</label>
+                                <input type="text" class="form-control" id="pincode" name="pincode" value="{{professional.pincode}}" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="pricing">Pricing :</label>
+                              <input type="text" class="form-control" id="pricing" name="pricing" value="{{professional.pricing}}" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="Time">Time required:</label>
+                              <input type="text" class="form-control" id="Time" name="time_req" value="{{professional.time_req}}" required>
+                          </div>
+                          <div class="form-group">
+                              <label for="Desc">Description :</label>
+                              <input type="text" class="form-control" id="Desc" name="service_desc" value="{{professional.service_desc}}" required>
+                          </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+          </div>
+          
+          <div id="trans-table">
+            <h2 class="headings" >Today's service requests :</h2>
+            {% if R_Services | length == 0 %}
+                    <h5>No customer requests available</h5>
+            {% else %}
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Contact no.</th>
+                <th scope="col">Location</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for req in R_Services %}
+              <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{req.customer.fullname}}</td>
+                <td>{{req.customer.phone_no}}</td>
+                <td>{{req.customer.address}}</td>
+                <td>
+                  <a href="/accept_cust_request/{{ req.id }}/{{professional.id}}" class="btn btn-success" onclick="return confirmReject('{{ req.customer.fullname }}');">Accept</a>
+                  <a href="/reject_cust_request/{{ req.id }}/{{professional.id}}" class="btn btn-warning" onclick="return confirmDelete('{{ req.customer.fullname }}');">Reject</a>
+                </td>
+              </tr>
+              <script>
+              function confirmReject(customerName) {
+                return confirm("Are you sure you want to accept " + customerName + "'s request?");
+              }
+              
+              function confirmDelete(customerName) {
+                return confirm("Are you sure you want to delete the request from " + customerName + "?");
+              }
+              </script>
+              </td>
+          </tr>
+              </tr>
+              {% endfor %}
+                        
+            </tbody>
+          </table>
+          {% endif%}
+        </div>
+          
+          <div id="trans-table">
+            <h3 class="headings">Your services :</h3>
+            {% if c_Services | length == 0 %}
+                <h5>OOps!! No closed requests available</h5>
+            {% else %}
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Customer name</th>
+                <th scope="col">Contact no.</Details></th>
+                <th scope="col">Location</th>
+                <th scope="col">Date of req</th>
+                <th scope="col">Status</th>
+                <th scope="col">Rating</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for req in c_Services %}
+              <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{req.customer.fullname}}</td>
+                <td>{{req.customer.phone_no}}</td>
+                <td>{{req.customer.address}}</td>
+                <td>{{req.date_of_request}}</td>
+                <td>{{req.service_status}}</td>
+                <td>{{req.service_rating}}</td>
+                <td>
+                  {% if req.service_status == 'Completed' %}
+                  <a href="/professional_review/{{ req.id }}" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Reviw_customer{{req.id}}" >Close it?</a>
+                  {% elif req.service_status == 'Accepted' %}
+                      Ongoing
+                  {% else %}
+                      Reviewed
+                  {% endif %}
+
+                  </td>
+              </tr>
+            </div>
+            </tbody>
+            <div id="Reviw_customer{{req.id}}" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h4 class="modal-title">Your Profile</h4>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                      </div>
+                      <div class="modal-body">
+                          <form action="/professional_review/{{ req.id }}" method="POST">
+                              <div class="form-group">
+                                  <label for="name">Customer Name:</label>
+                                  <input type="text" class="form-control" id="name" value="{{req.customer.fullname}}" disabled>
+                              </div>
+                              <div class="form-group">
+                                  <label for="username">Phone Number:</label>
+                                  <input type="text" class="form-control" id="username" value="{{req.customer.phone_no}}" disabled>
+                              </div>
+                              <div class="form-group">
+                                  <label for="address">Address:</label>
+                                  <input type="text" class="form-control" id="address" value="{{req.customer.address}}" disabled>
+                              </div>
+                              <div class="form-group">
+                                  <label for="pincode">Duration</label>
+                                  <input type="text" class="form-control" id="pincode" value="{{req.date_of_request}}-{{req.date_of_completion}}" disabled>
+                              </div>
+                              <div class="form-group">
+                                  <label for="Remark">Any Remarks  for customer ?</label>
+                                  <textarea class="form-control" id="Remark" name="remark" rows="2" placeholder="" required></textarea>
+                              </div>
+                              <div class="modal-footer">
+                                  <button type="submit" class="btn btn-primary">Save Changes</button>
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+            
+          </table>
+          
+          
+        </div>
+        
+
+    </div>
+    
+</body>
+</html>

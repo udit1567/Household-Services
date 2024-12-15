@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+        <div id="Admin_canvas">
+            <nav class="navbar navbar-expand-lg " style="margin-top: -14px;">
+                <div class="container-fluid" style="background-color: rgb(252, 218, 168);">
+                    <a class="navbar-brand" href="#">Admin Dashboard</a>
+                    <div>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link active"  aria-current="page" href="/admin_dashboard">Home</a>
+                                </li> 
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="/Admin_search_services">Search</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="/Admin_summary">Summary</a>
+                                </li> 
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="/Admin_manage">Manage</a>
+                                </li> 
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="/login">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            
+            <div id="trans-table">   
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="headings">Services</h4>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-size: 0.9rem; padding: 0.4rem 0.8rem; border-radius: 5px;">
+                        <h6 style="font-size: 1rem; margin: 0;">{{message}}</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#addServiceModal">
+                        + New services
+                    </button>
+                    
+                </div>             
+                <table class="table table-hover">
+
+                    {% if services | length == 0 %}
+                    <h5>OOps!! No available Service</h5>
+                    {% else %}
+                    
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Service Name</th>
+                            <th scope="col">Base Price</th>
+                            <th scope="col">Time required</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ser in services %}
+                        <tr>
+                            <th scope="row">{{loop.index}}</th>
+                            <td>{{ser.service_name}}</td>
+                            <td>{{ser.service_bp}}</td>
+                            <td>{{ser.time_req}}</td>
+                            <td>{{ser.service_desc}}</td>
+                            <td>
+                                <a href="/service_edit/{{ser.id}}" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editServiceModal{{ser.id}}">
+                                    Edit
+                                </a>
+                                <a href="/delete_service/{{ser.id}}" class="btn btn-danger" onclick="return confirmDelete();">Delete</a>
+                                <script>
+                                function confirmDelete() {
+                                    return confirm("Are you sure you want to delete this service?");
+                                }
+                                </script>
+                            </td>
+                        </tr>
+                        <div id="editServiceModal{{ser.id}}" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Edit Services</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/edit_service/{{ser.id}}" method="POST">
+                                            <div class="form-group">
+                                                <label for="serviceName">Service Name:</label>
+                                                <input type="text" class="form-control" id="serviceName" name="service_name"  value="{{ser.service_name}}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="basePrice">Base Price:</label>
+                                                <input type="number" class="form-control" id="basePrice" name="base_price" value="{{ser.service_bp}}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Time">Time required:</label>
+                                                <input type="text" class="form-control" id="Time" name="time_req" value="{{ser.time_req}}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Desc">Description :</label>
+                                                <input type="text" class="form-control" id="Desc" name="service_desc" value="{{ser.service_desc}}" required>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        {% endif %}
+                </table>
+                
+            </div>
+            
+
+            
+            <div id="addServiceModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add New Service</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/add_services" method="POST">
+                                <div class="form-group">
+                                    <label for="newServiceName">Service Name:</label>
+                                    <input type="text" class="form-control" id="newServiceName" name="service_name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newBasePrice">Base Price:</label>
+                                    <input type="number" class="form-control" id="newBasePrice" name="base_price" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Time">Time required:</label>
+                                    <input type="text" class="form-control" id="Time" name="time_req"  required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Desc">Description :</label>
+                                    <input type="text" class="form-control" id="Desc" name="service_desc"  required>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Add Service</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            
+            <div id="trans-table">               
+                <table class="table table-hover">
+                    <h4 class="headings">Professionals</h4>
+                    {% if professionals | length == 0 %}
+                    <h5>Oops!! No pending professionals requests</h5>
+                    {% else %}
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Service Name</th>
+                            <th scope="col">Experience (Yrs)</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for prof in professionals %}
+                        <tr>
+                            <th scope="row">
+                                <button type="button" class="btn btn-link p-0 text-decoration-none" data-bs-toggle="modal" data-bs-target="#professional_info{{ prof.id }}">
+                                    {{ loop.index }}
+                                </button>
+                            </th>
+                            <td>{{ prof.fullname }}</td>
+                            <td>{{ prof.service.service_name }}</td>
+                            <td>{{ prof.experience }}</td>
+                            <td>
+                                {% if prof.application_status == "Pending" %}
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approveModal{{ prof.id }}">
+                                        Approve
+                                    </button>
+                                    <a href="/reject_professional/{{ prof.id }}" class="btn btn-warning" onclick="return confirmreject();">Reject</a>
+                                    <a href="/delete_professional/{{ prof.id }}" class="btn btn-danger" onclick="return confirmDelete();">Delete</a>
+                                    <script>
+                                        function confirmreject() {
+                                            return confirm("Are you sure you want to reject this professional?");
+                                        }
+                                        function confirmDelete() {
+                                            return confirm("Are you sure you want to delete this professional?");
+                                        }
+                                    </script>
+                                {% else %}
+                                    <span>{{ prof.application_status }}</span>
+                                {% endif %}
+                            </td>
+                            
+                        </tr>
+                        <div id="professional_info{{ prof.id }}" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">{{ prof.fullname }}'s Details</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="professionalName">Professional Name:</label>
+                                                <input type="text" class="form-control" id="professionalName" value="{{ prof.fullname }}" disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="username">Username:</label>
+                                                <input type="text" class="form-control" id="username" value="{{ prof.username }}" disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="phone">Phone Number:</label>
+                                                <input type="text" class="form-control" id="phone" value="{{ prof.phone_no }}" disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="address">Address:</label>
+                                                <input type="text" class="form-control" id="address" value="{{ prof.address }}" disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="pincode">Pincode:</label>
+                                                <input type="text" class="form-control" id="pincode" value="{{ prof.pincode }}" disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="experience">Experience:</label>
+                                                <input type="text" class="form-control" id="experience" value="{{ prof.experience }}" disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="experience">Application status:</label>
+                                                <input type="text" class="form-control" id="experience" value="{{ prof.application_status }}" disabled>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="modal fade" id="approveModal{{ prof.id }}" tabindex="-1" aria-labelledby="approveModalLabel{{ prof.id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="approveModalLabel{{ prof.id }}">{{ prof.fullname }}'s Documents</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body d-flex justify-content-center align-items-center flex-column">
+                                        <iframe src="{{ url_for('professional_pdf', professional_id=prof.id) }}" style="width:90%; height:400px; border: 1px solid #8e8e8e;"></iframe>
+                                        <p class="mt-3">Please review the professional’s details before approving.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="/approve_professional/{{prof.id}}" method="POST">
+                                            <input type="hidden" name="professional_id" value="{{ prof.id }}">
+                                            <button type="submit" class="btn btn-success">Approve</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </tbody>
+                    {% endif %}
+                </table>
+            </div>
+            
+            
+            
+            <div id="trans-table">   
+            <table class="table table-hover">
+                <h4 class="headings">Service Requests</h4>
+                {% if Service_R | length == 0 %}
+                <h5>OOps!! No Service requests available</h5>
+                {% else %}
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Service</th>
+                        <th scope="col">Assigned Professionals</th>
+                        <th scope="col">Request date</th>
+                        <th scope="col">completion date</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for service in Service_R %}
+                    <tr>
+                        <th scope="row">{{loop.index}}</th>
+                        <td>{{service.customer.fullname}}</td>
+                        <td>{{service.professionals.service.service_name}}</td>
+                        <td>{{service.professionals.fullname}}</td>
+                        <td>{{service.date_of_request}}</td>
+                        <td>{{service.date_of_completion}}</td>
+                        <td>
+                            {% if service.service_status == "Accepted" %}
+                                Ongoing
+                            {% else %}
+                                {{ service.service_status }}
+                            {% endif %}
+                        </td>
+                </tbody>
+                {% endfor %}
+                {% endif %}
+            </table>
+        </div>
+        </div>
+
+</body>
+</html>

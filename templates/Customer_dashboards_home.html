@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div id="canvas">
+        <nav class="navbar navbar-expand-lg" style="margin-top: -14px;">
+            <div class="container-fluid" style="background-color: rgb(252, 218, 168);">
+              <a class="navbar-brand" href="#">Customer Dashboard</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="display: flex; margin-left: 1000px;">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/customer_dashboard/{{user.id}}">Home</a>
+                  </li> 
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/customer_search_services/{{user.id}}">Search</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/cust_summary_dash/{{user.id}}">Summary</a>
+                  </li> 
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/login">Logout</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+        </nav>
+        <div style="display: flex; align-items: center;">
+          <h3>Welcome, {{user.fullname}}!</h3>
+          <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editUserInfoModal{{user.id}}" 
+                  style="margin-left: auto; margin-top: 0px;">
+              My Profile
+          </button>
+        </div>
+
+      
+      
+      
+<div id="editUserInfoModal{{user.id}}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Your Profile</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+              <form action="/edit_cust_info/{{user.id}}" method="POST">
+                  <div class="form-group">
+                      <label for="name">Name:</label>
+                      <input type="text" class="form-control" id="name" name="fullname" value="{{user.fullname}}" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="username">Username:</label>
+                      <input type="text" class="form-control" id="username" name="username" value="{{user.username}}" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" class="form-control" id="phone" name="phone_no" value="{{user.phone_no}}" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="address">Address:</label>
+                      <input type="text" class="form-control" id="address" name="address" value="{{user.address}}" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="pincode">Pincode:</label>
+                      <input type="text" class="form-control" id="pincode" name="pincode" value="{{user.pincode}}" required>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+        
+        
+        <div class="container" id="panel">
+          {% if Service | length == 0 %}
+            <h5>OOps!! you dont have any services</h5>
+          {% else %}
+          <h2>Looking For?</h2>
+          <div class="service-grid">
+            {% for ser in Service %}
+            <a href="/looking_for/{{ser.id}}/{{user.id}}" style="text-decoration: none; color: inherit;">
+              <div class="service-item">
+                  <h3>{{ser.service_name}}</h3></a>
+              </div>
+            {% endfor %}
+              
+          </div>
+          {% endif %}
+        </div>
+
+        
+        <div id="trans-table">
+          <h4 class="headings">Service History :</h4>
+          {% if R_Services | length == 0 %}
+            <h5>OOps!! you dont have any service history</h5>
+          {% else %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Service Name</th>
+                        <th scope="col">Assigned professional</th>
+                        <th scope="col">Contact no.</th>
+                        <th scope="col">Time required</th>
+                        
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for ser in R_Services %}
+                    <tr>
+                        <th scope="row">{{loop.index}}</th>
+                        <td>{{ser.service.service_name}}</td>
+                        <td>{{ser.professionals.fullname}}</td>
+                        <td>{{ser.professionals.phone_no}}</td>
+                        <td>{{ser.professionals.time_req}}</td>
+                        <td>
+                          {% if ser.service_status == 'Accepted' %}
+                          <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#close_service_req{{ser.id}}" >Completed ?</a>
+                          {% else %}
+                            {{ ser.service_status }}
+                          {% endif %}
+                        </td>
+                    </tr>
+                    <div class="modal fade" id="close_service_req{{ser.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+                      <div class="modal-dialog custom-modal">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Service Remark</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="card p-4">
+                              <h3 class="text-center">Service Remarks</h3>
+                              <p>Service Name : {{ser.service.service_name}}</p>
+                              <p>Professional Name: {{ser.professionals.fullname }}</p>
+                              <p>Contact no : {{ser.professionals.phone_no }}</p>
+                              <p>Date of Request: {{ser.date_of_request}}</p>
+                              <form class="form-inline" action="/service_remark/{{ ser.id }}/{{ user.id }}" method="POST">
+                                <div class="form-group" style="width: 100%; max-width: 250px; display: flex; align-items: center; gap: 8px;">
+                                  <label for="rating" style="margin-bottom: 0; white-space: nowrap;">Rate this service:</label>
+                                  <select class="form-control" id="rating" name="rating" required style="flex-grow: 1;">
+                                      <option value="" disabled selected>Select a rating</option>
+                                      <option value="1">1 - Poor</option>
+                                      <option value="2">2 - Fair</option>
+                                      <option value="3">3 - Good</option>
+                                      <option value="4">4 - Very Good</option>
+                                      <option value="5">5 - Excellent</option>
+                                  </select>
+                              </div>
+                              
+                                <div class="form-group" style=" display: flex; align-items: center; gap: 8px; margin: 5px;">
+                                  <label style="margin-bottom: 0; white-space: nowrap;">Remarks (if any):</label>
+                                  <div class="form-group">
+                                      <textarea class="form-control" name="remarks" rows="2"></textarea>
+                                  </div>
+                              </div>
+                                <div class="modal-footer">
+                                  <div class="mb-3 row">
+                                    <div class="col-sm-12">
+                                        <p>Are you sure you want to close this service?</p>
+                                    </div>
+                                </div>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success">Close it</button>
+                                </div>
+                            </form>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %} 
+                </tbody>           
+            </table>       
+    </div>
+</body>
+</html>
