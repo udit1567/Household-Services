@@ -136,18 +136,6 @@ The application adheres to the following flow:
 ![Screenshot 2024-12-15 201417](https://github.com/user-attachments/assets/96116d2a-0f22-41fd-a037-c8d5dbd45558)
 
 
-
-
-
-
-## Contribution
-
-Contributions are welcome! Feel free to open issues or submit pull requests.
-
-## License
-
-This project is licensed under the MIT License.
-
 ## Contact
 
 For any inquiries or support, please contact:
