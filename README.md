@@ -120,8 +120,18 @@ The application adheres to the following flow:
 - **Professional Dashboard**: View and manage assigned requests.
 
 ## Screenshots
+![Screenshot 2024-12-15 201326](https://github.com/user-attachments/assets/de6fd50c-7f04-4f34-b6ab-fb12a52fe6dd)
+![Screenshot 2024-12-15 201150](https://github.com/user-attachments/assets/463dba2f-15d2-42b9-a590-1fbb944ceabf)
+![Screenshot 2024-12-15 201003](https://github.com/user-attachments/assets/44161c8d-7784-4d42-a136-7d39904ca47e)
+![Screenshot 2024-12-15 201925](https://github.com/user-attachments/assets/05331407-17b4-4f9a-806f-2afbbe83d205)
+![Screenshot 2024-12-15 201907](https://github.com/user-attachments/assets/a5006523-3519-492e-90cb-55b6eea3e364)
+![Screenshot 2024-12-15 201717](https://github.com/user-attachments/assets/4830ba16-92c7-4d95-8b1e-01cb03677228)
+![Screenshot 2024-12-15 201625](https://github.com/user-attachments/assets/b191f600-d916-4221-bef5-74373c180366)
+![Screenshot 2024-12-15 201447](https://github.com/user-attachments/assets/47ab6369-a3c1-4fb5-8a03-7fb2ab1fe10e)
+![Screenshot 2024-12-15 201417](https://github.com/user-attachments/assets/e4ea13fb-d04f-4376-8dfc-38fc2b5ad1c3)
+![Screenshot 2024-12-15 201351](https://github.com/user-attachments/assets/1ced6295-b5bc-47cb-86aa-1b2ccff387fc)
 
-(Add screenshots of the application here to showcase the interface and functionality.)
+
 
 ## Contribution
 
