@@ -49,6 +49,7 @@ The Household Services Application is a multi-user platform designed to provide 
 - **Database**: SQLite
 
 ## Database Models
+![schemaa](https://github.com/user-attachments/assets/7ec37275-4bd9-4f3a-9c51-c505945776e4)
 
 ### Users Table
 - `id` (Primary Key)
