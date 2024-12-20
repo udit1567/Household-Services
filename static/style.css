@@ -1,51 +1,65 @@
-#canvas{
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Responsive Canvas */
+#canvas {
     width: 100%;
-    height: 730px;
+    height: 100vh; /* Use relative height for responsiveness */
     padding: 6px;
     background-color: #fff6e9;
 }
 
-#Admin_canvas{
+#Admin_canvas {
     width: 100%;
-    height: 980px;
+    height: 110vh; /* Adjusted for larger admin view */
     padding: 6px;
     background-color: #fff6e9;
 }
 
-#form-login{
+/* Responsive Login Form */
+#form-login {
     border: 1px solid gray;
-    width: 430px;
-    height: 350px;
-    margin: auto;
-    margin-top: 100px;
+    width: 90%; /* Percentage-based width for responsiveness */
+    max-width: 430px; /* Ensures it doesn't grow too large */
+    height: auto;
+    margin: 10vh auto; /* Center with responsive spacing */
     padding: 15px;
     border-radius: 10px;
     background-color: rgb(255, 237, 197);
 }
 
-#trans-table{
+/* Responsive Table */
+#trans-table {
     border: 2px solid rgb(255, 203, 114);
     margin-top: 25px !important;
     margin: auto;
     overflow-y: auto;
-    height: 241px;
-    width: 900px;
+    height: auto; /* Adjust height dynamically */
+    max-height: 50vh;
+    width: 95%; /* Percentage-based width */
+    max-width: 900px; /* Limit for large screens */
     border-radius: 15px;
     padding: 12px;
     background-color: rgb(255, 237, 197);
 }
 
+/* Container Responsiveness */
 .container {
     text-align: center;
     padding: 20px;
     background-color: rgb(255, 237, 197);
     border-radius: 10px;
-    width: 200px;
-    height: 200px;
+    width: 90%; /* Adapt to smaller screens */
+    max-width: 300px;
+    height: auto;
     box-shadow: 0px 4px 10px rgba(231, 114, 114, 0.1);
 }
 
-
+/* Service Grid Responsiveness */
 .service-grid {
     display: flex;
     justify-content: space-around;
@@ -57,7 +71,8 @@
     background-color: #ffc164;
     border-radius: 14px;
     padding: 15px;
-    width: 170px;
+    width: calc(100% / 3 - 30px); /* Adjust width dynamically */
+    max-width: 170px; /* Limit for larger screens */
     text-align: center;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s;
@@ -67,62 +82,82 @@
     background-color: #f5a022;
 }
 
-#panel{
-    height: 220px;
-    width: 640px;
-    margin-top: 35px !important;
-    margin: auto;
+/* Responsive Panel */
+#panel {
+    height: auto; /* Dynamic height */
+    width: 95%; /* Percentage width */
+    max-width: 640px;
+    margin: 35px auto !important;
 }
 
+/* Table Styling */
 .table thead th {
     position: sticky;
     top: 0;
-    background-color: rgb(255, 208, 138); 
+    background-color: rgb(255, 208, 138);
 }
 
 .table th, .table td {
-    text-align: center; 
-    vertical-align: middle; 
+    text-align: center;
+    vertical-align: middle;
 }
 
+/* Modal Content */
 .modal-content {
     height: 100%;
 }
 
-#form-professional-register{
-    border: 1px solid rgb(0, 0, 0);
-    width: 540px;
-    height: 620px;
-    margin: auto;
-    margin-top: 20px;
+/* Responsive Forms */
+#form-professional-register, #form-customer-register {
+    border: 1px solid gray;
+    width: 90%; /* Responsive width */
+    max-width: 540px;
+    height: auto;
+    margin: 20px auto;
     padding: 17px;
     border-radius: 15px;
     background-color: rgb(255, 237, 197);
-    
 }
 
-#form-customer-register{
-    border: 2px solid gray;
-    width: 413px;
-    height: 589px;
-    margin: auto;
-    margin-top: 18px;
-    padding: 16px;
-    border-radius: 20px;
-    background-color: rgb(255, 237, 197);
-    
-}
-
+/* Inline Form Group Responsiveness */
 .form-inline .form-group {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-}
-.form-inline .form-group label {
-    margin-right: 10px;
-    width: 120px;
+    flex-wrap: wrap; /* Wraps content for smaller screens */
 }
 
-.flashes{
-    
+.form-inline .form-group label {
+    margin-right: 10px;
+    width: 100%; /* Full width on small screens */
+    max-width: 120px; /* Restricts width on larger screens */
+}
+
+.flashes {
+    /* Add specific responsive styling as needed */
+}
+
+/* Media Queries for Additional Responsiveness */
+@media (max-width: 768px) {
+    .service-item {
+        width: calc(100% / 2 - 20px); /* Adjust grid for smaller screens */
+    }
+
+    #form-login {
+        margin-top: 20px;
+    }
+
+    #panel {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-item {
+        width: 100%; /* Full width for very small screens */
+    }
+
+    #form-login, #trans-table, #panel {
+        padding: 10px;
+    }
 }
